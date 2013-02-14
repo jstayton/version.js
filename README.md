@@ -87,9 +87,9 @@ includes Version.js. `data-url` is the only required option.
     A number of placeholders are available, which Version.js then replaces with
     the specified `data` attribute values:
 
-    *   *{{LIBRARY}}*
-    *   *{{VERSION}}*
-    *   *{{FILE}}*
+    *   `{{LIBRARY}}`
+    *   `{{VERSION}}`
+    *   `{{FILE}}`
 
     For example, the Google CDN URL can be expressed as:
 
