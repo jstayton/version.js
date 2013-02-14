@@ -1,0 +1,45 @@
+{
+  "name": "version.js",
+  "version": "0.1.0",
+  "title": "Version.js",
+  "description": "Test a different script version with the switch of a query string.",
+  "keywords": [
+    "test",
+    "tests",
+    "testing",
+    "version",
+    "versions",
+    "load",
+    "script",
+    "scripts",
+    "query",
+    "querystring",
+    "versionjs"
+  ],
+  "homepage": "https://github.com/jstayton/version.js",
+  "author": {
+    "name": "Justin Stayton",
+    "url": "http://justinstayton.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/jstayton/version.js.git"
+  },
+  "bugs": "https://github.com/jstayton/version.js/issues",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/jstayton/version.js/blob/master/LICENSE-MIT"
+    }
+  ],
+  "devDependencies": {
+    "grunt": "~0.3.17",
+    "grunt-bump": "~0.0.1",
+    "grunt-jasmine-task": "~0.2.3",
+    "grunt-pkg-to-component": "~1.0.1",
+    "grunt-saucelabs": "~2.0.1"
+  },
+  "scripts": {
+    "test": "grunt test"
+  }
+}
