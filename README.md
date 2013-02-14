@@ -42,8 +42,8 @@ installed, Bower can install Version.js with a single command:
 
 ### Manually
 
-*   (Minified)[https://raw.github.com/jstayton/version.js/master/build/version.min.js]
-*   (Unminified)[https://raw.github.com/jstayton/version.js/master/build/version.js]
+*   [Minified](https://raw.github.com/jstayton/version.js/master/build/version.min.js)
+*   [Unminified](https://raw.github.com/jstayton/version.js/master/build/version.js)
 
 Usage
 -----
