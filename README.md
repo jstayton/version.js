@@ -42,8 +42,8 @@ installed, Bower can install Version.js with a single command:
 
 ### Manually
 
-Copy `version.js` or `version.min.js` from the `build` directory to your
-codebase.
+*   (Minified)[https://raw.github.com/jstayton/version.js/master/build/version.min.js]
+*   (Unminified)[https://raw.github.com/jstayton/version.js/master/build/version.js]
 
 Usage
 -----
