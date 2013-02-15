@@ -6,6 +6,7 @@ Version.js
 
 Test a different script version with the switch of a query string.
 
+*   [Example](http://jstayton.github.com/version.js)
 *   [Release Notes](https://github.com/jstayton/version.js/wiki/Release-Notes)
 
 Why?
