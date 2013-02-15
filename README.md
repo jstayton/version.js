@@ -1,6 +1,9 @@
 Version.js
 ==========
 
+[![Selenium Test Status](https://saucelabs.com/buildstatus/versionjs)](https://saucelabs.com/u/versionjs)
+[![Build Status](https://secure.travis-ci.org/jstayton/version.js.png?branch=master)](https://travis-ci.org/jstayton/version.js)
+
 Test a different script version with the switch of a query string.
 
 Version.js is handy in a number of browser-based, JavaScript testing scenarios:
@@ -33,17 +36,15 @@ Version.js is handy in a number of browser-based, JavaScript testing scenarios:
 Download
 --------
 
+*   [Minified](https://raw.github.com/jstayton/version.js/master/build/version.min.js)
+*   [Unminified](https://raw.github.com/jstayton/version.js/master/build/version.js)
+
 ### Bower
 
 [Bower](http://twitter.github.com/bower) is a package manager for the web. Once
 installed, Bower can install Version.js with a single command:
 
     bower install version.js
-
-### Manually
-
-*   [Minified](https://raw.github.com/jstayton/version.js/master/build/version.min.js)
-*   [Unminified](https://raw.github.com/jstayton/version.js/master/build/version.js)
 
 Usage
 -----

@@ -76,7 +76,7 @@ module.exports = function (grunt) {
       all: {
         testname: 'version.js',
         tags: ['master'],
-        urls: ['<config:jasmine.all>'],
+        urls: '<config:jasmine.all>',
         concurrency: 3,
         browsers: (function () {
           var compact = {
