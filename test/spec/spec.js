@@ -1,4 +1,6 @@
 describe('Version.js', function () {
+  'use strict';
+
   var queryVersion = function () {
     var match = /[&\?]versionjs=([^&]+)/.exec(window.location.search);
 

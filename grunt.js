@@ -1,4 +1,3 @@
-/*global module:false*/
 module.exports = function (grunt) {
   'use strict';
 
@@ -10,7 +9,7 @@ module.exports = function (grunt) {
       banner: grunt.file.read('src/version.js').match(bannerRegex)[0]
     },
     lint: {
-      files: ['grunt.js', 'src/**/*.js']
+      files: ['grunt.js', 'src/**/*.js', 'test/spec/**/*.js']
     },
     min: {
       all: {
@@ -69,6 +68,10 @@ module.exports = function (grunt) {
         jquery: true
       },
       globals: {
+        describe: true,
+        expect: true,
+        it: true,
+        module: true,
         process: true
       }
     },
