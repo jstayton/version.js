@@ -1,0 +1,9 @@
+body {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  padding: 40px;
+}
+
+#page {
+  margin: auto;
+  width: 780px;
+}

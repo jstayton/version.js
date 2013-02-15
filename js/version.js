@@ -1,12 +1,12 @@
 /*!
- * <%= pkg.title %> v<%= pkg.version %>
+ * Version.js v0.1.0
  *
- * <%= pkg.description %>
+ * Test a different script version with the switch of a query string.
  *
- * <%= pkg.homepage %>
+ * https://github.com/jstayton/version.js
  *
- * Copyright <%= grunt.template.today('yyyy') %> by <%= pkg.author.name %>
- * Licensed <%= _.pluck(pkg.licenses, 'type').join(', ') %>
+ * Copyright 2013 by Justin Stayton
+ * Licensed MIT
  */
 (function (window, document) {
   'use strict';
