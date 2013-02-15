@@ -84,7 +84,7 @@ module.exports = function (grunt) {
                   '*': ['Windows 2008', 'Mac 10.8', 'Linux']
                 },
                 'firefox': {
-                  '3.6': 'Windows 2012',
+                  '3.6': ['Windows 2012', 'Linux'],
                   '*': ['Windows 2012', 'Mac 10.6', 'Linux']
                 },
                 'internet explorer': {
@@ -95,10 +95,12 @@ module.exports = function (grunt) {
                   '10': 'Windows 2012'
                 },
                 'ipad': {
+                  '4.3': 'Mac 10.6',
                   '5.1': 'Mac 10.8',
                   '6': 'Mac 10.8'
                 },
                 'iphone': {
+                  '4.3': 'Mac 10.6',
                   '5.1': 'Mac 10.8',
                   '6': 'Mac 10.8'
                 },

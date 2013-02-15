@@ -6,6 +6,11 @@ Version.js
 
 Test a different script version with the switch of a query string.
 
+*   [Release Notes](https://github.com/jstayton/version.js/wiki/Release-Notes)
+
+Why?
+----
+
 Version.js is handy in a number of browser-based, JavaScript testing scenarios:
 
 *   Running **automated tests** of your library or plugin against different
