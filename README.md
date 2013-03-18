@@ -42,8 +42,8 @@ Version.js is handy in a number of browser-based, JavaScript testing scenarios:
 Download
 --------
 
-*   [Minified](https://raw.github.com/jstayton/version.js/master/build/version.min.js)
-*   [Unminified](https://raw.github.com/jstayton/version.js/master/build/version.js)
+*   [Minified without comments](https://raw.github.com/jstayton/version.js/master/build/version.min.js)
+*   [Full source with comments](https://raw.github.com/jstayton/version.js/master/build/version.js)
 
 ### Bower
 
