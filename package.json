@@ -1,6 +1,6 @@
 {
   "name": "version.js",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "title": "Version.js",
   "description": "Test a different script version with the switch of a query string.",
   "keywords": [
