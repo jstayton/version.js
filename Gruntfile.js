@@ -6,13 +6,13 @@ module.exports = function (grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     concat: {
-      options: {
-        banner: banner,
-        stripBanners: {
-          block: true
-        }
-      },
       build: {
+        options: {
+          banner: banner,
+          stripBanners: {
+            block: true
+          }
+        },
         src: 'src/version.js',
         dest: 'build/version.js'
       }
@@ -142,11 +142,13 @@ module.exports = function (grunt) {
       }
     },
     uglify: {
-      options: {
-        banner: banner
-      },
       build: {
-        'build/version.min.js': 'src/version.js'
+        options: {
+          banner: banner
+        },
+        files: {
+          'build/version.min.js': 'src/version.js'
+        }
       }
     },
     watch: {
