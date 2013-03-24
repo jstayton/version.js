@@ -55,44 +55,66 @@ installed, Bower can install Version.js with a single command:
 Usage
 -----
 
-Version.js is included and configured in a single line of code:
+There are two ways of using Version.js: `version.load` and through `data`
+attributes.
 
-    <script src="version.js" data-url="google" data-lib="jquery" data-ver="1.5.0"></script>
+### `version.load`
+
+Once Version.js is loaded, a `version` object is accessible with a single `load`
+method:
+
+    version.load({
+      url: '/assets/js/{{LIBRARY}}/{{FILE}}-{{VERSION}}.js',
+      library: 'jquery',
+      version: '1.5.0',
+      file: 'jquery.min'
+    });
+
+`load` accepts an options object as the only parameter (see below for all
+options), and can be called multiple times to load different scripts.
 
 The version of the script can then be changed through the `versionjs` query
-string parameter:
+string parameter (configurable with the `param` option):
 
     http://local.dev/users?versionjs=1.6.1
     http://local.dev/users?versionjs=1.8.0
     http://local.dev/users?versionjs=1.9.1
 
-There's no `version` object or API to call. As soon as Version.js is loaded, it
-parses the `data` attributes and loads the specified script in blocking fashion.
+### `data` attributes
 
-To illustrate this, say you're currently loading jQuery 1.7.2 from Google's CDN:
+Version.js can also load a single script by specifying the options as `data`
+attributes on the `<script>` tag that loads Version.js itself:
+
+    <script src="version.js" data-url="google" data-lib="jquery" data-ver="1.5.0" data-file="jquery.min"></script>
+
+As soon as Version.js is loaded, it parses the `data` attributes and loads the
+specified script. This is a handy convenience that can be used by itself or in
+conjunction with `version.load`.
+
+To illustrate, say you're currently loading jQuery 1.7.2 from Google's CDN:
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 
 This same script can be loaded by Version.js by replacing the above with the
 following:
 
-    <script src="version.js" data-url="google" data-lib="jquery" data-ver="1.7.2"></script>
+    <script src="version.js" data-url="google" data-lib="jquery" data-ver="1.7.2" data-file="jquery.min"></script>
 
-As before, jQuery 1.7.2 will be included and ready for use, but with the
-added convenience that Version.js brings.
+As before, jQuery 1.7.2 will be loaded and ready for use, but with the added
+convenience that Version.js brings.
 
-### Options
+Options
+-------
 
-All options are specified as `data` attributes on the `<script>` tag that
-includes Version.js. `data-url` is the only required option.
+_url_ / _data-url_ is the only required option.
 
-*   **data-url**
+*   **url** / **data-url** _string_
 
     The relative or full URL pattern to the script. The name of a CDN can also
     be used for convenience — see the list of supported CDNs below.
 
     A number of placeholders are available, which Version.js then replaces with
-    the specified `data` attribute values:
+    the specified option values:
 
     *   `{{LIBRARY}}`
     *   `{{VERSION}}`
@@ -107,21 +129,31 @@ includes Version.js. `data-url` is the only required option.
         /assets/js/jquery-{{VERSION}}.min.js
         /lib/{{LIBRARY}}/{{FILE}}-{{VERSION}}.js
 
-*   **data-lib**
+    ----------------------------------------------------------------------------
+*   **library** / **data-lib** _string_
 
     The name of the library. Replaces the `{{LIBRARY}}` placeholder in the URL.
 
-*   **data-ver**
+    ----------------------------------------------------------------------------
+*   **version** / **data-ver** _string_
 
-    The default version to load when no `versionjs` query string parameter is
-    specified. Replaces the `{{VERSION}}` placeholder in the URL.
+    The default version to load when a query string parameter is not specified.
+    Replaces the `{{VERSION}}` placeholder in the URL.
 
-*   **data-file**
+    ----------------------------------------------------------------------------
+*   **file** / **data-file** _string_
 
     The file name of the script. If unspecified, the name of the library is
     used. Replaces the `{{FILE}}` placeholder in the URL.
 
-### CDNs
+    ----------------------------------------------------------------------------
+*   **param** / **data-param** _string_
+
+    The query string parameter to get the version from. If unspecified,
+    `versionjs` is used.
+
+CDNs
+----
 
 For convenience, Version.js has built-in support for a number of common CDNs.
 These identifiers can be used in place of a URL:
