@@ -20,9 +20,10 @@
     jsdelivr: '//cdn.jsdelivr.net/{{LIBRARY}}/{{VERSION}}/{{FILE}}.js'
   };
 
-  // Get the version from the 'versionjs' query string. 'null' if unspecified.
-  version.queryVersion = function () {
-    var match = /[&\?]versionjs=([^&]+)/.exec(window.location.search);
+  // Get the version from a query string param. 'null' if unspecified.
+  version.queryVersion = function (param) {
+    var regex = new RegExp('[&\\?]' + param + '=([^&]+)'),
+        match = regex.exec(window.location.search);
 
     return match && match[1];
   };
@@ -30,7 +31,7 @@
   // Build a script URL from a CDN constant or custom URL. Pass in optional
   // replacements for {{LIBRARY}}, {{VERSION}}, and {{FILE}}.
   version.scriptUrl = function (url, replacements) {
-    var scriptUrl = this.CDN[url] || url;
+    var scriptUrl = version.CDN[url] || url;
 
     if (!scriptUrl) {
       return null;
@@ -70,35 +71,45 @@
   // Get the 'data' attribute options from the script element that loaded this
   // code.
   version.selfScriptOptions = function () {
-    var selfScript = this.selfScript() || document.createElement('script');
+    var selfScript = version.selfScript() || document.createElement('script');
 
     return {
       url: selfScript.getAttribute('data-url'),
       library: selfScript.getAttribute('data-lib'),
       version: selfScript.getAttribute('data-ver'),
-      file: selfScript.getAttribute('data-file')
+      file: selfScript.getAttribute('data-file'),
+      param: selfScript.getAttribute('data-param')
     };
   };
 
-  // Get the options to load the script.
-  version.options = function () {
-    var options = this.selfScriptOptions();
+  // Get a set of options normalized with default values.
+  version.options = function (options) {
+    var param = options.param || 'versionjs';
 
-    // Prefer the query string version over the 'data-load' default version.
-    options.version = this.queryVersion() || options.version;
-
-    return options;
+    return {
+      url: options.url,
+      library: options.library,
+      version: version.queryVersion(param) || options.version,
+      file: options.file,
+      param: param
+    };
   };
 
-  // Load the script based on the options.
-  version.load = function () {
-    var options = this.options(),
-        scriptUrl = this.scriptUrl(options.url, options),
-        scriptString = this.scriptString(scriptUrl);
+  // Load a script based on options.
+  version.load = function (opts) {
+    var options = version.options(opts),
+        scriptUrl = version.scriptUrl(options.url, options),
+        scriptString = version.scriptString(scriptUrl);
 
-    return this.writeScript(scriptString);
+    return version.writeScript(scriptString);
   };
 
-  // Load the script immediately when this code is parsed and executed.
-  version.load();
+  // Load the script configured by the 'data' attributes on the script element
+  // that loaded this code.
+  version.load(version.selfScriptOptions());
+
+  // Expose public methods for programmatic use.
+  window.version = {
+    load: version.load
+  };
 })(window, document);
