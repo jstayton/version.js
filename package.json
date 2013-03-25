@@ -40,7 +40,7 @@
     "grunt-contrib-jshint": "~0.3.0",
     "grunt-contrib-uglify": "~0.2.0",
     "grunt-contrib-watch": "~0.3.1",
-    "grunt-saucelabs": "~3.0.6"
+    "grunt-saucelabs": "~3.0.7"
   },
   "scripts": {
     "test": "grunt test"
