@@ -34,24 +34,7 @@ describe('Version.js', function () {
 
   describe('Loading with `version.load`', function () {
     it('should load a script', function () {
-      runs(function () {
-        version.load({
-          url: 'cdnjs',
-          library: 'lodash.js',
-          version: '1.0.1',
-          file: 'lodash.min',
-          param: 'lodash'
-        });
-      });
-
-      waitsFor(function () {
-        return typeof _ !== 'undefined';
-      }, 'The script should be loaded', 5000);
-
-      runs(function () {
         expect(_).toBeDefined();
-        expect(_.VERSION).toEqual('1.0.1');
-      });
     });
   });
 });
