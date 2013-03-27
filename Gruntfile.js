@@ -33,7 +33,8 @@ module.exports = function (grunt) {
           specs: 'test/spec/**/*.js',
           template: 'test/runner.tmpl',
           templateOptions: {
-            qs: '1.7.1'
+            versionjs: '1.7.1',
+            loadtest: '3.0.0'
           }
         },
         src: 'src/**/*.js'

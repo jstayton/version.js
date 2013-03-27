@@ -24,10 +24,14 @@
   "browser": true,
   "jquery": true,
   "globals": {
+    "Backbone": true,
     "describe": true,
     "expect": true,
     "it": true,
     "runs": true,
+    "testLoad100": true,
+    "testLoad200": true,
+    "testLoad300": true,
     "version": true,
     "waitsFor": true,
     "_": true

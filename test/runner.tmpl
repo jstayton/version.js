@@ -9,7 +9,7 @@
 <% if (options.qs) { %>
     <script>
       if (!window.location.search) {
-        window.location.search = '?versionjs=<%= options.qs %>';
+        window.location.search = '?versionjs=<%= options.versionjs %>&loadtest=<%= options.loadtest %>';
       }
     </script>
 <% } %>
@@ -19,11 +19,29 @@
     <script src="<%= script %>" data-url="google" data-lib="jquery" data-ver="1.9.1" data-file="jquery.min"></script>
     <script>
       version.load({
+        url: './test/fixtures/testload-1.0.0.js'
+      });
+
+      version.load({
+        url: './test/fixtures/testload-{{VERSION}}.js',
+        version: '2.0.0',
+        param: 'testload'
+      });
+
+      version.load({
         url: 'cdnjs',
         library: 'lodash.js',
         version: '1.0.1',
         file: 'lodash.min',
         param: 'lodash'
+      });
+
+      version.load({
+        url: 'jsdelivr',
+        library: 'backbonejs',
+        version: '1.0.0',
+        file: 'backbone-min',
+        param: 'backbone'
       });
     </script>
     <% } else { %>
