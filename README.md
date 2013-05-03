@@ -6,7 +6,7 @@ Version.js
 
 Test a different script version with the switch of a query string.
 
-*   [Example](http://jstayton.github.com/version.js)
+*   [Example](http://jstayton.github.io/version.js)
 *   [Release Notes](https://github.com/jstayton/version.js/wiki/Release-Notes)
 
 Why?
@@ -47,8 +47,8 @@ Download
 
 ### Bower
 
-[Bower](http://twitter.github.com/bower) is a package manager for the web. Once
-installed, Bower can install Version.js with a single command:
+[Bower](http://bower.io) is a package manager for the web. Once installed, Bower
+can install Version.js with a single command:
 
     bower install version.js
 
