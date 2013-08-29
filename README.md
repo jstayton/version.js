@@ -63,12 +63,14 @@ attributes.
 Once Version.js is loaded, a `version` object is accessible with a single `load`
 method:
 
-    version.load({
-      url: '/assets/js/{{LIBRARY}}/{{FILE}}-{{VERSION}}.js',
-      library: 'jquery',
-      version: '1.5.0',
-      file: 'jquery.min'
-    });
+```javascript
+version.load({
+  url: '/assets/js/{{LIBRARY}}/{{FILE}}-{{VERSION}}.js',
+  library: 'jquery',
+  version: '1.5.0',
+  file: 'jquery.min'
+});
+```
 
 `load` accepts an options object as the only parameter (see below for all
 options), and can be called multiple times to load different scripts.
@@ -85,7 +87,9 @@ string parameter (configurable with the `param` option):
 Version.js can also load a single script by specifying the options as `data`
 attributes on the `<script>` tag that loads Version.js itself:
 
-    <script src="version.js" data-url="google" data-lib="jquery" data-ver="1.5.0" data-file="jquery.min"></script>
+```html
+<script src="version.js" data-url="google" data-lib="jquery" data-ver="1.5.0" data-file="jquery.min"></script>
+```
 
 As soon as Version.js is loaded, it parses the `data` attributes and loads the
 specified script. This is a handy convenience that can be used by itself or in
@@ -93,12 +97,16 @@ conjunction with `version.load`.
 
 To illustrate, say you're currently loading jQuery 1.7.2 from Google's CDN:
 
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+```html
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+```
 
 This same script can be loaded by Version.js by replacing the above with the
 following:
 
-    <script src="version.js" data-url="google" data-lib="jquery" data-ver="1.7.2" data-file="jquery.min"></script>
+```html
+<script src="version.js" data-url="google" data-lib="jquery" data-ver="1.7.2" data-file="jquery.min"></script>
+```
 
 As before, jQuery 1.7.2 will be loaded and ready for use, but with the added
 convenience that Version.js brings.
