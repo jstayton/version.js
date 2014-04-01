@@ -14,7 +14,7 @@
     </script>
 <% } %>
 <% with (scripts) { %>
-  <% [].concat(jasmine, vendor, helpers, src, specs, reporters, start).forEach(function (script) { %>
+  <% [].concat(polyfills, jasmine, vendor, helpers, src, specs, reporters, start).forEach(function (script) { %>
     <% if (script.match(/version\.js$/)) { %>
     <script src="<%= script %>" data-url="google" data-lib="jquery" data-ver="1.9.1" data-file="jquery.min"></script>
     <script>

@@ -1,14 +1,15 @@
 module.exports = function (grunt) {
   'use strict';
 
-  var banner = grunt.file.read('src/version.js').match(/\/\*[\s\S]*?\*\/\n/)[0];
+  var testTasks = [];
 
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
+    banner: grunt.file.read('src/version.js').match(/\/\*[\s\S]*?\*\/\n/)[0],
     concat: {
       build: {
         options: {
-          banner: banner,
+          banner: '<%= banner %>',
           stripBanners: {
             block: true
           }
@@ -21,131 +22,110 @@ module.exports = function (grunt) {
       server: {}
     },
     jasmine: {
-      withoutqs: {
+      'without-qs': {
         options: {
+          helpers: 'test/helpers/**/*.js',
           specs: 'test/spec/**/*.js',
-          template: 'test/runner.tmpl'
+          template: 'test/runner.tmpl',
+          vendor: 'test/vendor/**/*.js'
         },
         src: 'src/**/*.js'
       },
-      withqs: {
+      'with-qs': {
         options: {
+          helpers: 'test/helpers/**/*.js',
           specs: 'test/spec/**/*.js',
           template: 'test/runner.tmpl',
           templateOptions: {
             versionjs: '1.7.1',
             loadtest: '3.0.0'
-          }
+          },
+          vendor: 'test/vendor/**/*.js'
         },
         src: 'src/**/*.js'
       }
     },
     jshint: {
-      Gruntfile: {
-        options: {
-          jshintrc: '.jshintrc'
-        },
-        files: {
-          src: 'Gruntfile.js'
-        }
+      options: {
+        jshintrc: true
       },
-      src: {
-        options: {
-          jshintrc: 'src/.jshintrc'
-        },
-        files: {
-          src: 'src/**/*.js'
-        }
-      },
-      test: {
-        options: {
-          jshintrc: 'test/spec/.jshintrc'
-        },
-        files: {
-          src: 'test/spec/**/*.js'
-        }
-      }
+      gruntfile: 'Gruntfile.js',
+      src: 'src/**/*.js',
+      test: 'test/spec/**/*.js'
     },
     'saucelabs-jasmine': {
       all: {
-        testname: 'version.js',
-        tags: ['master'],
-        urls: [
-          'http://localhost:8000/_SpecRunner.html',
-          'http://localhost:8000/_SpecRunner.html?versionjs=1.6.2'
-        ],
-        concurrency: 3,
-        browsers: (function () {
-          var compact = {
-                'chrome': {
-                  '*': ['Windows 2008', 'Mac 10.8', 'Linux']
+        options: {
+          testname: 'Version.js',
+          tags: ['master'],
+          urls: [
+            'http://localhost:8000/_SpecRunner.html',
+            'http://localhost:8000/_SpecRunner.html?versionjs=1.6.2'
+          ],
+          browsers: (function () {
+            var compact = {
+                  'chrome': {
+                    '*': 'Windows 8.1'
+                  },
+                  'firefox': {
+                    '4': 'Windows 8.1',
+                    '*': 'Windows 8.1'
+                  },
+                  'internet explorer': {
+                    '9': 'Windows 7',
+                    '10': 'Windows 8',
+                    '11': 'Windows 8.1'
+                  },
+                  'iphone': {
+                    '6.1': 'OS X 10.8',
+                    '7.1': 'OS X 10.9'
+                  },
+                  'opera': {
+                    '11': 'Windows 7',
+                    '12': 'Windows 7'
+                  },
+                  'safari': {
+                    '6': 'OS X 10.8',
+                    '7': 'OS X 10.9'
+                  }
                 },
-                'firefox': {
-                  '3.6': ['Windows 2012', 'Linux'],
-                  '*': ['Windows 2012', 'Mac 10.6', 'Linux']
-                },
-                'internet explorer': {
-                  '6': 'Windows 2003',
-                  '7': 'Windows 2003',
-                  '8': 'Windows 2003',
-                  '9': 'Windows 2008',
-                  '10': 'Windows 2012'
-                },
-                'ipad': {
-                  '4.3': 'Mac 10.6',
-                  '5.1': 'Mac 10.8',
-                  '6': 'Mac 10.8'
-                },
-                'iphone': {
-                  '4.3': 'Mac 10.6',
-                  '5.1': 'Mac 10.8',
-                  '6': 'Mac 10.8'
-                },
-                'opera': {
-                  '11': 'Windows 2008',
-                  '12': ['Windows 2008', 'Linux']
-                },
-                'safari': {
-                  '5': ['Windows 2008', 'Mac 10.6'],
-                  '6': 'Mac 10.8'
-                }
-              },
-              expanded = [];
+                expanded = [];
 
-          Object.keys(compact).forEach(function (browserName) {
-            Object.keys(compact[browserName]).forEach(function (version) {
-              var platforms = compact[browserName][version];
+            Object.keys(compact).forEach(function (browserName) {
+              Object.keys(compact[browserName]).forEach(function (version) {
+                var platforms = compact[browserName][version];
 
-              if (!Array.isArray(platforms)) {
-                platforms = [platforms];
-              }
-
-              platforms.forEach(function (platform) {
-                var options = {
-                      browserName: browserName
-                    };
-
-                if (version !== '*') {
-                  options.version = version;
+                if (!Array.isArray(platforms)) {
+                  platforms = [platforms];
                 }
 
-                if (platform) {
-                  options.platform = platform;
-                }
+                platforms.forEach(function (platform) {
+                  var options = {
+                        browserName: browserName
+                      };
 
-                expanded.push(options);
+                  if (version !== '*') {
+                    options.version = version;
+                  }
+
+                  if (platform) {
+                    options.platform = platform;
+                  }
+
+                  expanded.push(options);
+                });
               });
             });
-          });
 
-          return expanded;
-        })()
+            return expanded;
+          })()
+        }
       }
     },
     uglify: {
       build: {
         options: {
-          banner: banner
+          banner: '<%= banner %>'
         },
         files: {
           'build/version.min.js': 'src/version.js'
@@ -153,31 +133,32 @@ module.exports = function (grunt) {
       }
     },
     watch: {
-      files: '<%= jshint.all %>',
-      tasks: 'test'
+      jasmine: {
+        files: 'src/**/*.js',
+        tasks: 'jasmine'
+      },
+      'jshint-gruntfile': {
+        files: '<%= jshint.gruntfile.files.src %>',
+        tasks: 'jshint:gruntfile'
+      },
+      'jshint-src': {
+        files: '<%= jshint.src.files.src %>',
+        tasks: 'jshint:src'
+      },
+      'jshint-test': {
+        files: '<%= jshint.test.files.src %>',
+        tasks: 'jshint:test'
+      }
     }
   });
 
-  grunt.registerTask('jasmine-remove-reporter', 'Removes reporter.js script from the spec runner HTML.', function () {
-    var specRunner = grunt.file.read('_SpecRunner.html');
-
-    specRunner = specRunner.replace(/<script src=\".*?reporter\.js\"><\/script>/, '');
-
-    grunt.file.write('_SpecRunner.html', specRunner);
-  });
-
-  grunt.registerTask('jasmine-delete-runner', 'Deletes the spec runner HTML file.', function () {
-    grunt.file.delete('_SpecRunner.html');
-  });
-
-  var testTasks = ['jshint', 'jasmine'];
+  testTasks.push('jshint', 'jasmine');
 
   if (process.env.SAUCE_USERNAME && process.env.SAUCE_ACCESS_KEY) {
     grunt.loadNpmTasks('grunt-contrib-connect');
     grunt.loadNpmTasks('grunt-saucelabs');
 
-    testTasks.push('jasmine:withoutqs:build', 'jasmine-remove-reporter', 'connect', 'saucelabs-jasmine',
-                   'jasmine-delete-runner');
+    testTasks.push('jasmine:without-qs:build', 'connect', 'saucelabs-jasmine');
   }
 
   grunt.registerTask('test', testTasks);

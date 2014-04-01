@@ -3,6 +3,7 @@
   "camelcase": true,
   "curly": true,
   "eqeqeq": true,
+  "es3": true,
   "forin": true,
   "immed": true,
   "latedef": true,
@@ -19,7 +20,6 @@
   "maxlen": 120,
   "boss": true,
   "eqnull": true,
-  "es5": true,
   "evil": false,
   "sub": true,
   "node": true
