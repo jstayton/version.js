@@ -1,5 +1,8 @@
+'use strict';
+
 module.exports = function (grunt) {
-  'use strict';
+  require('time-grunt')(grunt);
+  require('load-grunt-tasks')(grunt);
 
   var testTasks = [];
 
@@ -125,7 +128,8 @@ module.exports = function (grunt) {
     uglify: {
       build: {
         options: {
-          banner: '<%= banner %>'
+          banner: '<%= banner %>',
+          report: 'gzip'
         },
         files: {
           'build/version.min.js': 'src/version.js'
@@ -137,17 +141,21 @@ module.exports = function (grunt) {
         files: 'src/**/*.js',
         tasks: 'jasmine'
       },
-      'jshint-gruntfile': {
+      jshintGruntfile: {
         files: '<%= jshint.gruntfile.files.src %>',
         tasks: 'jshint:gruntfile'
       },
-      'jshint-src': {
+      jshintSrc: {
         files: '<%= jshint.src.files.src %>',
         tasks: 'jshint:src'
       },
-      'jshint-test': {
+      jshintTest: {
         files: '<%= jshint.test.files.src %>',
         tasks: 'jshint:test'
+      },
+      concat: {
+        files: '<%= concat.build.src %>',
+        tasks: 'concat'
       }
     }
   });
@@ -163,10 +171,4 @@ module.exports = function (grunt) {
 
   grunt.registerTask('test', testTasks);
   grunt.registerTask('default', ['test', 'concat', 'uglify']);
-
-  grunt.loadNpmTasks('grunt-contrib-concat');
-  grunt.loadNpmTasks('grunt-contrib-jasmine');
-  grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-contrib-watch');
 };
