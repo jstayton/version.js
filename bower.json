@@ -1,0 +1,14 @@
+{
+  "name": "version.js",
+  "version": "0.2.0",
+  "main": "build/version.js",
+  "ignore": [
+    "src",
+    "test",
+    ".gitignore",
+    ".jshintrc",
+    ".travis.yml",
+    "Gruntfile.js",
+    "package.json"
+  ]
+}
