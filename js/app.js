@@ -1,3 +1,0 @@
-$(function () {
-  $('#version').text($().jquery);
-});

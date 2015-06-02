@@ -1,18 +1,18 @@
 <!doctype html>
-<html lang="en">
+<html>
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="description" content="Test a different script version with the switch of a query string.">
-    <meta name="viewport" content="width=device-width">
     <title>Version.js</title>
     <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="css/styles.css">
     <script src="js/version.js" data-url="google" data-lib="jquery" data-ver="1.9.1"></script>
-    <script src="js/app.js"></script>
+    <script>
+      $(function () {
+        $('#version').text($().jquery);
+      });
+    </script>
   </head>
   <body>
-    <div id="page">
+    <div id="container">
       <h1>Loaded jQuery <span id="version">#.#.#</span></h1>
       <div>
         <p>Try loading a different version by appending the query string <code>?versionjs=#.#.#</code> to the URL.</p>
