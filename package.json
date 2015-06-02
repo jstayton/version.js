@@ -3,6 +3,7 @@
   "version": "0.2.0",
   "title": "Version.js",
   "description": "Test a different script version with the switch of a query string.",
+  "main": "build/version.js",
   "keywords": [
     "test",
     "tests",
