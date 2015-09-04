@@ -18,7 +18,7 @@ describe('Version.js', function () {
 
   it('should load a default script version when no query string', function () {
     if (queryVersion('versionjs')) {
-      return true;
+      return pending('skipping, query string present');
     }
 
     expect($().jquery).toEqual('1.9.1');
@@ -28,7 +28,7 @@ describe('Version.js', function () {
     var version = queryVersion('versionjs');
 
     if (!version) {
-      return true;
+      return pending('skipping, no query string present');
     }
 
     expect($().jquery).toEqual(version);
