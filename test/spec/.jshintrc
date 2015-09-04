@@ -29,6 +29,7 @@
     "describe": true,
     "expect": true,
     "it": true,
+    "pending": true,
     "runs": true,
     "testLoad100": true,
     "testLoad200": true,

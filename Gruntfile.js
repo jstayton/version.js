@@ -60,68 +60,21 @@ module.exports = function (grunt) {
       all: {
         options: {
           testname: 'Version.js',
-          tags: ['master'],
+          build: process.env.TRAVIS_BUILD_NUMBER,
+          tags: [process.env.TRAVIS_BRANCH],
           urls: [
             'http://localhost:8000/_SpecRunner.html',
             'http://localhost:8000/_SpecRunner.html?versionjs=1.6.2'
           ],
-          browsers: (function () {
-            var compact = {
-                  'chrome': {
-                    '*': 'Windows 8.1'
-                  },
-                  'firefox': {
-                    '4': 'Windows 8.1',
-                    '*': 'Windows 8.1'
-                  },
-                  'internet explorer': {
-                    '9': 'Windows 7',
-                    '10': 'Windows 8',
-                    '11': 'Windows 8.1'
-                  },
-                  'iphone': {
-                    '6.1': 'OS X 10.8',
-                    '7.1': 'OS X 10.9'
-                  },
-                  'opera': {
-                    '11': 'Windows 7',
-                    '12': 'Windows 7'
-                  },
-                  'safari': {
-                    '6': 'OS X 10.8',
-                    '7': 'OS X 10.9'
-                  }
-                },
-                expanded = [];
-
-            Object.keys(compact).forEach(function (browserName) {
-              Object.keys(compact[browserName]).forEach(function (version) {
-                var platforms = compact[browserName][version];
-
-                if (!Array.isArray(platforms)) {
-                  platforms = [platforms];
-                }
-
-                platforms.forEach(function (platform) {
-                  var options = {
-                        browserName: browserName
-                      };
-
-                  if (version !== '*') {
-                    options.version = version;
-                  }
-
-                  if (platform) {
-                    options.platform = platform;
-                  }
-
-                  expanded.push(options);
-                });
-              });
-            });
-
-            return expanded;
-          })()
+          browsers: [
+            ['Windows 8.1', 'chrome', 44],
+            ['Windows 8.1', 'firefox', 40],
+            ['Windows 8.1', 'firefox', 4],
+            ['Windows 8.1', 'internet explorer', 11],
+            ['Windows 7', 'internet explorer', 9],
+            ['OS X 10.10', 'safari', 8],
+            ['OS X 10.8', 'safari', 6]
+          ]
         }
       }
     },
@@ -163,9 +116,6 @@ module.exports = function (grunt) {
   testTasks.push('jshint', 'jasmine');
 
   if (process.env.SAUCE_USERNAME && process.env.SAUCE_ACCESS_KEY) {
-    grunt.loadNpmTasks('grunt-contrib-connect');
-    grunt.loadNpmTasks('grunt-saucelabs');
-
     testTasks.push('jasmine:without-qs:build', 'connect', 'saucelabs-jasmine');
   }
 

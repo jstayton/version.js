@@ -1,1 +1,1 @@
-jasmine.getEnv().addReporter(new jasmine.JSReporter());
+jasmine.getEnv().addReporter(new jasmine.JSReporter2());
