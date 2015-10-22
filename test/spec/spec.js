@@ -58,4 +58,12 @@ describe('Version.js', function () {
   it('should load a script using the `jsdelivr` CDN `url`', function () {
     expect(Backbone).toBeDefined();
   });
+
+  it('should load a stylesheet from `data` attributes', function () {
+    expect(document.getElementById('testcss100').offsetWidth).toEqual(100);
+  });
+
+  it('should load a stylesheet using `version.load`', function () {
+    expect(document.getElementById('testcss200').offsetWidth).toEqual(200);
+  });
 });

@@ -15,9 +15,9 @@
 
   // CDN constants for use in place of full URLs.
   version.CDN = {
-    cdnjs: '//cdnjs.cloudflare.com/ajax/libs/{{LIBRARY}}/{{VERSION}}/{{FILE}}.js',
-    google: '//ajax.googleapis.com/ajax/libs/{{LIBRARY}}/{{VERSION}}/{{FILE}}.js',
-    jsdelivr: '//cdn.jsdelivr.net/{{LIBRARY}}/{{VERSION}}/{{FILE}}.js'
+    cdnjs: '//cdnjs.cloudflare.com/ajax/libs/{{LIBRARY}}/{{VERSION}}/{{FILE}}{{SUFFIX}}',
+    google: '//ajax.googleapis.com/ajax/libs/{{LIBRARY}}/{{VERSION}}/{{FILE}}{{SUFFIX}}',
+    jsdelivr: '//cdn.jsdelivr.net/{{LIBRARY}}/{{VERSION}}/{{FILE}}{{SUFFIX}}'
   };
 
   // Get the version from a query string param. 'null' if unspecified.
@@ -46,17 +46,24 @@
       scriptUrl = scriptUrl.replace(/\{\{LIBRARY\}\}/, replacements.library);
       scriptUrl = scriptUrl.replace(/\{\{VERSION\}\}/, replacements.version);
       scriptUrl = scriptUrl.replace(/\{\{FILE\}\}/, replacements.file || replacements.library);
+      scriptUrl = scriptUrl.replace(/\{\{SUFFIX\}\}/, replacements.suffix);
     }
 
     return scriptUrl;
   };
 
-  // Build a script tag as a string. 'null' if 'src' unspecified.
-  version.scriptString = function (src) {
-    return src && '<script type="text/javascript" src="' + src + '"><\/script>';
+  // Build a script/link tag as a string. 'null' if 'src' unspecified or unknown 'type'.
+  version.scriptString = function (src, type) {
+    if (src && type === 'css') {
+      return '<link rel="stylesheet" type="text/css" href="' + src + '"></link>';
+    } else if (src && type === 'js') {
+      return '<script type="text/javascript" src="' + src + '"><\/script>';
+    } else {
+      return null;
+    }
   };
 
-  // Write a script tag to the document.
+  // Write a script/link tag to the document.
   version.writeScript = function (script) {
     return script && document.write(script);
   };
@@ -74,10 +81,12 @@
     var selfScript = version.selfScript() || document.createElement('script');
 
     return {
+      type: selfScript.getAttribute('data-type'),
       url: selfScript.getAttribute('data-url'),
       library: selfScript.getAttribute('data-lib'),
       version: selfScript.getAttribute('data-ver'),
       file: selfScript.getAttribute('data-file'),
+      suffix: selfScript.getAttribute('data-suffix'),
       param: selfScript.getAttribute('data-param')
     };
   };
@@ -85,12 +94,15 @@
   // Get a set of options normalized with default values.
   version.options = function (options) {
     var param = options.param || 'versionjs';
+    var type = options.type || 'js';
 
     return {
+      type: type,
       url: options.url,
       library: options.library,
       version: version.queryVersion(param) || options.version,
       file: options.file,
+      suffix: options.suffix || {'js': '.js', 'css': '.css'}[type],
       param: param
     };
   };
@@ -99,7 +111,7 @@
   version.load = function (opts) {
     var options = version.options(opts),
         scriptUrl = version.scriptUrl(options.url, options),
-        scriptString = version.scriptString(scriptUrl);
+        scriptString = version.scriptString(scriptUrl, options.type);
 
     return version.writeScript(scriptString);
   };

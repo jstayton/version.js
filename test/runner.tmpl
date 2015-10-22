@@ -20,6 +20,7 @@
       <% [].concat(polyfills, jasmine, boot, vendor, helpers, src, specs, reporters).forEach(function (script) { %>
         <% if (script.match(/version\.js$/)) { %>
           <script src="<%= script %>" data-url="google" data-lib="jquery" data-ver="1.9.1" data-file="jquery.min"></script>
+          <script src="<%= script %>" data-type="css" data-url="./test/fixtures/testcss-{{VERSION}}.css" data-ver="1.0.0" data-param="testcss"></script>
           <script>
             version.load({
               url: './test/fixtures/testload-1.0.0.js'
@@ -29,6 +30,13 @@
               url: './test/fixtures/testload-{{VERSION}}.js',
               version: '2.0.0',
               param: 'testload'
+            });
+
+            version.load({
+              type: 'css',
+              url: './test/fixtures/testcss-{{VERSION}}.css',
+              version: '2.0.0',
+              param: 'testcss'
             });
 
             version.load({
@@ -52,5 +60,7 @@
         <% } %>
       <% }) %>
     <% } %>
+    <div id="testcss100" class="testcss100">1</div>
+    <div id="testcss200" class="testcss200">2</div>
   </body>
 </html>

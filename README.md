@@ -111,6 +111,22 @@ following:
 As before, jQuery 1.7.2 will be loaded and ready for use, but with the added
 convenience that Version.js brings.
 
+Note that ".js" suffix was automatically added to `data-file`; you can override
+this using `data-suffix` or `data-url`.
+
+### Multiple resources
+
+You can safely use multiple `<script src="version.js" ...>` tags and/or call
+`version.load()` multiple times.  You can have different `param` values
+independently control versions of different libraries, and reuse each `param`
+value several times to load parts of a multi-file library.
+
+### Stylesheets
+
+Version.js can also load stylesheets - setting `type`/`data-type` option to
+"css" causes a `<link rel="stylesheet" ...>` tag to be generated instead of a
+`<script>` tag.
+
 Options
 -------
 
@@ -127,15 +143,23 @@ _url_ / _data-url_ is the only required option.
     *   `{{LIBRARY}}`
     *   `{{VERSION}}`
     *   `{{FILE}}`
+    *   `{{SUFFIX}}`
 
     For example, the Google CDN URL can be expressed as:
 
-        //ajax.googleapis.com/ajax/libs/{{LIBRARY}}/{{VERSION}}/{{FILE}}.js
+        //ajax.googleapis.com/ajax/libs/{{LIBRARY}}/{{VERSION}}/{{FILE}}{{SUFFIX}}
 
     Relative, local URLs can be used just as well:
 
         /assets/js/jquery-{{VERSION}}.min.js
         /lib/{{LIBRARY}}/{{FILE}}-{{VERSION}}.js
+
+    ----------------------------------------------------------------------------
+
+*   **type** / **data-type** _string_
+
+    Can take the value "js" for loading a JavaScript script and "css" for
+    loading a CSS stylesheet.  Defaults to a script.
 
     ----------------------------------------------------------------------------
 *   **library** / **data-lib** _string_
@@ -153,6 +177,12 @@ _url_ / _data-url_ is the only required option.
 
     The file name of the script. If unspecified, the name of the library is
     used. Replaces the `{{FILE}}` placeholder in the URL.
+
+    ----------------------------------------------------------------------------
+*   **suffix** / **data-suffix** _string_
+
+    Replaces the `{{SUFFIX}}` placeholder in the URL.  If unspecified, depends
+    on type: '.js' when loading a script, '.css' when loading a stylesheet.
 
     ----------------------------------------------------------------------------
 *   **param** / **data-param** _string_
