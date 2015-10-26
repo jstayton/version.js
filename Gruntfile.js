@@ -61,7 +61,7 @@ module.exports = function (grunt) {
       all: {
         options: {
           testname: 'Version.js',
-          build: process.env.TRAVIS_BUILD_NUMBER,
+          build: process.env.TRAVIS_BUILD_NUMBER || 'dev-'+process.env.USER+':'+Date.now(),
           tags: [process.env.TRAVIS_BRANCH],
           urls: [
             'http://localhost:8000/_SpecRunner.html',
