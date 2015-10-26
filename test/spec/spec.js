@@ -35,7 +35,7 @@ describe('Version.js', function () {
   });
 
   it('should load a script version using a custom `param` query string', function () {
-    if (queryVersion('loadtest')) {
+    if (queryVersion('testload')) {
       expect(testLoad300).toBeDefined();
     }
     else {

@@ -40,8 +40,9 @@ module.exports = function (grunt) {
           specs: 'test/spec/**/*.js',
           template: 'test/runner.tmpl',
           templateOptions: {
+            qs: true,
             versionjs: '1.7.1',
-            loadtest: '3.0.0'
+            testload: '3.0.0'
           },
           vendor: 'test/vendor/**/*.js'
         },
@@ -64,7 +65,7 @@ module.exports = function (grunt) {
           tags: [process.env.TRAVIS_BRANCH],
           urls: [
             'http://localhost:8000/_SpecRunner.html',
-            'http://localhost:8000/_SpecRunner.html?versionjs=1.6.2'
+            'http://localhost:8000/_SpecRunner.html?versionjs=1.6.2&testload=3.0.0'
           ],
           browsers: [
             ['Windows 8.1', 'chrome', 44],
