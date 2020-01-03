@@ -1,3 +1,7 @@
+**NOTICE:** _This project is deprecated and no longer maintained. If you'd like
+to continue supporting a forked version, please reach out on Twitter
+([@kidjustino](https://twitter.com/kidjustino)) to have it listed here._
+
 Version.js
 ==========
 
@@ -183,7 +187,7 @@ Feedback
 
 Please open an issue to request a feature or submit a bug report. Or even if
 you just want to provide some feedback, I'd love to hear. I'm also available on
-Twitter as [@jstayton](http://twitter.com/jstayton).
+Twitter as [@kidjustino](https://twitter.com/kidjustino).
 
 Contributing
 ------------
